@@ -28,6 +28,7 @@ public class TimeLog extends AppCompatActivity implements View.OnClickListener{
     Spinner spinnerPhase;
 
     int delta = 0;
+    int interrupciones = 0;
 
     Date dateStart, dateStop;
     private TextView mTextMessage;
@@ -131,14 +132,25 @@ public class TimeLog extends AppCompatActivity implements View.OnClickListener{
             case R.id.btnStopt:
 
                 obtenerHora2();
+                calcularInterrupciones();
+                calcularDelta();
 
                 break;
 
         }
     }
 
+    //Calculamos delta que es el tiempo que total que se demoro en el timer
+    private void calcularDelta() {
+    }
 
-   //Obtenemos la hora y fecha del dispositivo
+    //Este metodo sirve para ver si el usuario ingresa o no interrupciones en el timer
+    private void calcularInterrupciones() {
+
+    }
+
+
+    //Obtenemos la hora y fecha del dispositivo
     private void obtenerHora2() {
         dateStop = new Date();
         SimpleDateFormat fecha = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");

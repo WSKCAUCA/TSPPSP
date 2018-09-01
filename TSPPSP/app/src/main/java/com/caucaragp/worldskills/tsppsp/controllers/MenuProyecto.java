@@ -30,6 +30,10 @@ public class MenuProyecto extends AppCompatActivity implements View.OnClickListe
 
     //Referenciamos los elementos que tiene el layout
     private void inicializar() {
+
+        btnTime = findViewById(R.id.btnTime);
+        btnProjectPS = findViewById(R.id.btnPlanPS);
+        btnDefect = findViewById(R.id.btnDefect);
     }
 
     @Override
