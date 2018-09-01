@@ -64,7 +64,6 @@ public class ManageDB {
         closeDB();
     }
 
-
     //Método para ingresar valores a la tabla DEFECTLOG
     public void insertDefectLog(CDefectLog defectLog){
         openWriteB();
@@ -112,9 +111,9 @@ public class ManageDB {
         }
         cursorP.close();
 
-        for (int i=0;i<Constants.listPhases.length;i++){
+        for (int i=0;i<Constants.LIST_PHASES.length;i++){
             Results tmpResults = new Results();
-            String phase = Constants.listPhases[i];
+            String phase = Constants.LIST_PHASES[i];
             int tiempo=0;
             Cursor cursor = db.rawQuery("SELECT DELTA FROM TIMELOG WHERE PROJECT="+project+" AND PHASE='"+phase+"'; ",null);
             if (cursor.moveToFirst()){
@@ -150,7 +149,6 @@ public class ManageDB {
         return results;
     }
 
-
     //Función para obtener la información que va en Defects Injected in Phase
     public List<Results> defectsInjected(int project){
         openReadB();
@@ -164,9 +162,9 @@ public class ManageDB {
         }
         cursorP.close();
 
-        for (int i=0;i<Constants.listPhases.length;i++){
+        for (int i=0;i<Constants.LIST_PHASES.length;i++){
             Results tmpResults = new Results();
-            String phase = Constants.listPhases[i];
+            String phase = Constants.LIST_PHASES[i];
             int veces=0;
             Cursor cursor = db.rawQuery("SELECT * FROM DEFECTLOG WHERE PROJECT="+project+" AND PHASEI='"+phase+"'; ",null);
             if (cursor.moveToFirst()){
@@ -202,8 +200,6 @@ public class ManageDB {
         return results;
     }
 
-
-
     //Función para obtener la información que va en Defects Removed in Phase
     public List<Results> defectsRemoved(int project){
         openReadB();
@@ -217,9 +213,9 @@ public class ManageDB {
         }
         cursorP.close();
 
-        for (int i=0;i<Constants.listPhases.length;i++){
+        for (int i=0;i<Constants.LIST_PHASES.length;i++){
             Results tmpResults = new Results();
-            String phase = Constants.listPhases[i];
+            String phase = Constants.LIST_PHASES[i];
             int veces=0;
             Cursor cursor = db.rawQuery("SELECT * FROM DEFECTLOG WHERE PROJECT="+project+" AND PHASER='"+phase+"'; ",null);
             if (cursor.moveToFirst()){
