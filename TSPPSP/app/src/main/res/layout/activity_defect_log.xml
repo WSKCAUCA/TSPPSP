@@ -25,9 +25,10 @@
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:fontFamily="@font/allerta"
             android:text="@string/date"
-            android:textSize="15sp"
-            android:textColor="@color/colorAccent" />
+            android:textColor="@color/colorAccent"
+            android:textSize="15sp" />
 
         <EditText
             android:id="@+id/txtDate"
@@ -62,10 +63,11 @@
         <TextView
             android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:textSize="15sp"
             android:layout_gravity="center"
+            android:fontFamily="@font/allerta"
             android:text="@string/type"
-            android:textColor="@color/colorAccent" />
+            android:textColor="@color/colorAccent"
+            android:textSize="15sp" />
 
         <Spinner
             android:id="@+id/spinnerType"
@@ -96,9 +98,10 @@
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textSize="15sp"
+            android:fontFamily="@font/allerta"
             android:text="@string/phaseinject"
-            android:textColor="@color/colorAccent" />
+            android:textColor="@color/colorAccent"
+            android:textSize="15sp" />
 
         <Spinner
             android:id="@+id/spinnerPhaseI"
@@ -129,9 +132,10 @@
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textSize="15sp"
+            android:fontFamily="@font/allerta"
             android:text="@string/phaseremoved"
-            android:textColor="@color/colorAccent" />
+            android:textColor="@color/colorAccent"
+            android:textSize="15sp" />
 
         <Spinner
             android:id="@+id/spinnerPhaseR"
@@ -161,9 +165,10 @@
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:fontFamily="@font/allerta"
             android:text="@string/fixtime"
-            android:textSize="15sp"
-            android:textColor="@color/colorAccent" />
+            android:textColor="@color/colorAccent"
+            android:textSize="15sp" />
 
         <EditText
             android:id="@+id/txtFixTime"
@@ -221,6 +226,7 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
+                android:fontFamily="@font/allerta"
                 android:text="@string/defectdescrip"
                 android:textAlignment="center"
                 android:textColor="#fff"
