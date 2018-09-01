@@ -3,6 +3,7 @@ package com.caucaragp.worldskills.tsppsp.controllers;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
@@ -58,6 +59,22 @@ public class DefectLog extends AppCompatActivity implements View.OnClickListener
         escucharBotones();
         chronometer();
         listarSpinners();
+        validacion();
+    }
+
+    //Método para validar los campos que no estén vacios
+    private void validacion() {
+        int validar = 0;
+        if (txtDate.getText().toString().length()<0){
+            validar++;
+        }else {
+            txtDate.setError("Falta esté campo");
+        }
+        if (txtFixTime.getText().toString().length()<0){
+            validar++;
+        }else {
+            txtFixTime.setError("Falta esté campo");
+        }
     }
 
     //Método para inicializar las variables
@@ -92,16 +109,19 @@ public class DefectLog extends AppCompatActivity implements View.OnClickListener
 
             case R.id.btnGo:
                 bandera1=true;
+                Toast.makeText(this, "El tiempo empezo a correr en minutos", Toast.LENGTH_SHORT).show();
                 break;
 
             case R.id.btnStop:
                 bandera1=false;
+                Toast.makeText(this, "Pausa", Toast.LENGTH_SHORT).show();
                 break;
 
             case R.id.btnRestart:
                 bandera1=false;
                 tiempo[0]=0;
                 tiempo[1]=0;
+                Toast.makeText(this, "Reinicio cronometro", Toast.LENGTH_SHORT).show();
                 break;
 
         }

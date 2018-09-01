@@ -60,6 +60,14 @@ public class TimeLog extends AppCompatActivity implements View.OnClickListener{
         inicializamos();
         listarPhse();
         validar();
+        escuchar();
+    }
+
+    //Llamar o escuchar los botones
+    private void escuchar() {
+
+        btnStart.setOnClickListener(this);
+        btnStop.setOnClickListener(this);
     }
 
     //Creamos metodo para validar que los campos no esten vacios
@@ -142,10 +150,17 @@ public class TimeLog extends AppCompatActivity implements View.OnClickListener{
 
     //Calculamos delta que es el tiempo que total que se demoro en el timer
     private void calcularDelta() {
+
+
+
     }
 
     //Este metodo sirve para ver si el usuario ingresa o no interrupciones en el timer
     private void calcularInterrupciones() {
+
+
+
+
 
     }
 
