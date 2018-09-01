@@ -20,7 +20,7 @@ public class DefectLog extends AppCompatActivity implements View.OnClickListener
     TextView txtDate, txtFixTime, txtDefectDes;
     Button btnDate, btnGo, btnStop, btnRestart;
     Spinner spinnerType,spinnerPhaseI, spinnerPhaseR;
-    boolean bandera, bandera1;
+    boolean bandera, bandera1=false;
     int[] minutos ={0};
 
     private TextView mTextMessage;
@@ -52,6 +52,7 @@ public class DefectLog extends AppCompatActivity implements View.OnClickListener
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         inizialite();
         escucharBotones();
+        chronometer();
     }
 
     //Método para inicializar las variables
@@ -85,14 +86,16 @@ public class DefectLog extends AppCompatActivity implements View.OnClickListener
                 break;
 
             case R.id.btnGo:
+                bandera1=true;
                 break;
 
             case R.id.btnStop:
-
+                bandera1=false;
                 break;
 
             case R.id.btnRestart:
-
+                bandera1=false;
+                minutos[0]=0;
                 break;
 
         }
@@ -104,6 +107,42 @@ public class DefectLog extends AppCompatActivity implements View.OnClickListener
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         txtDate.setText(format.format(date));
     }
+
+    //Método para correr el fixTime
+    private void chronometer() {
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (bandera){
+                    try {
+                        Thread.sleep(60000);
+
+                    }catch (Exception e){
+
+                    }
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (bandera1) {
+                                minutos[0]++;
+                                txtFixTime.setText(Integer.toString(minutos[0]));
+                            }
+                        }
+                    });
+                }
+            }
+        });
+        thread.start();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        bandera1=false;
+        bandera=false;
+    }
+
 
 
 }
