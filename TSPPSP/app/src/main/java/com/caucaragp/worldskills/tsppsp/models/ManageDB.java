@@ -49,6 +49,15 @@ public class ManageDB {
         closeDB();
     }
 
+    //Método para actualizar valores a la tabla PROJECT
+    public void updateProject(CProyecto proyecto){
+        openWriteB();
+        ContentValues values = new ContentValues();
+        values.put("TIME",proyecto.getTime());
+        db.update("PROJECT",values,"IDPROJECT ="+proyecto.getId(),null);
+        closeDB();
+    }
+
     //Método para ingresar valores a la tabla TIMELOG
     public void insertTimeLog(CTimeLog timeLog){
         openWriteB();
@@ -251,5 +260,6 @@ public class ManageDB {
         return results;
     }
 
+    //Función que devuelve el tiempo del proyecto
 
 }
