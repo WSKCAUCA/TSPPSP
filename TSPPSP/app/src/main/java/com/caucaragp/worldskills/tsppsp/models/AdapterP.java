@@ -47,6 +47,7 @@ public class AdapterP extends RecyclerView.Adapter<AdapterP.Holder> {
         return proyectoList.size();
     }
 
+    //Clase la cual nos permite la creación y manipulacion del item
     public class Holder extends RecyclerView.ViewHolder {
 
         TextView txtNombreP = itemView.findViewById(R.id.txtNombreP);
