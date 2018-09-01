@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@drawable/fondoapp"
+    android:background="@drawable/prueba"
     android:layout_height="match_parent"
-    tools:context=".MenuPrincipal">
+    tools:context=".controllers.MenuPrincipal">
 
 </android.support.constraint.ConstraintLayout>

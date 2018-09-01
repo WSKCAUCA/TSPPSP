@@ -1,7 +1,9 @@
-package com.caucaragp.worldskills.tsppsp;
+package com.caucaragp.worldskills.tsppsp.controllers;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.caucaragp.worldskills.tsppsp.R;
 
 public class MenuPrincipal extends AppCompatActivity {
     @Override
