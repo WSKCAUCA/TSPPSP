@@ -117,7 +117,7 @@
             android:layout_height="match_parent" />
 
         <Button
-            android:id="@+id/btnStop"
+            android:id="@+id/btnStopt"
             android:layout_width="32dp"
             android:layout_height="match_parent" />
 
