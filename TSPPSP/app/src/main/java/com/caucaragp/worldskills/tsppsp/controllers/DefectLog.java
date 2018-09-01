@@ -6,22 +6,26 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.caucaragp.worldskills.tsppsp.R;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class DefectLog extends AppCompatActivity implements View.OnClickListener{
     //Declaración de variables
     TextView txtDate, txtFixTime, txtDefectDes;
     Button btnDate, btnGo, btnStop, btnRestart;
     Spinner spinnerType,spinnerPhaseI, spinnerPhaseR;
-    boolean bandera, bandera1=false;
-    int[] minutos ={0};
+    boolean bandera =true, bandera1=false;
+    int[] tiempo ={0,0};
 
     private TextView mTextMessage;
 
@@ -53,6 +57,7 @@ public class DefectLog extends AppCompatActivity implements View.OnClickListener
         inizialite();
         escucharBotones();
         chronometer();
+        listarSpinners();
     }
 
     //Método para inicializar las variables
@@ -95,7 +100,8 @@ public class DefectLog extends AppCompatActivity implements View.OnClickListener
 
             case R.id.btnRestart:
                 bandera1=false;
-                minutos[0]=0;
+                tiempo[0]=0;
+                tiempo[1]=0;
                 break;
 
         }
@@ -115,7 +121,7 @@ public class DefectLog extends AppCompatActivity implements View.OnClickListener
             public void run() {
                 while (bandera){
                     try {
-                        Thread.sleep(60000);
+                        Thread.sleep(1000);
 
                     }catch (Exception e){
 
@@ -125,8 +131,12 @@ public class DefectLog extends AppCompatActivity implements View.OnClickListener
                         @Override
                         public void run() {
                             if (bandera1) {
-                                minutos[0]++;
-                                txtFixTime.setText(Integer.toString(minutos[0]));
+                                tiempo[0]++;
+                                if (tiempo[0]==60){
+                                    tiempo[1]++;
+                                }
+                                txtFixTime.setText(Integer.toString(tiempo[1]));
+
                             }
                         }
                     });
@@ -134,6 +144,36 @@ public class DefectLog extends AppCompatActivity implements View.OnClickListener
             }
         });
         thread.start();
+    }
+
+    //Ingresamos o listamos elementos al spinner
+    private void listarSpinners() {
+
+        List<String> phase = new ArrayList<>();
+        phase.add("PLAN");
+        phase.add("DLC");
+        phase.add("CODE");
+        phase.add("COMPILE");
+        phase.add("UT");
+        phase.add("PM");
+        List<String> type = new ArrayList<>();
+        type.add("Documentation");
+        type.add("Syntax");
+        type.add("Build");
+        type.add("Package");
+        type.add("Assigment");
+        type.add("Interface");
+        type.add("Checking");
+        type.add("Data");
+        type.add("Fuction");
+        type.add("System");
+        type.add("Environment");
+
+        ArrayAdapter adapter = new ArrayAdapter<>(this,android.R.layout.simple_dropdown_item_1line, phase);
+        ArrayAdapter adapter1 = new ArrayAdapter<>(this,android.R.layout.simple_dropdown_item_1line, type);
+        spinnerPhaseR.setAdapter(adapter);
+        spinnerPhaseI.setAdapter(adapter);
+        spinnerType.setAdapter(adapter1);
     }
 
     @Override

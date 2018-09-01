@@ -50,7 +50,7 @@ public class MenuProyecto extends AppCompatActivity implements View.OnClickListe
 
             case R.id.btnDefect:
 
-                Intent intent1 = new Intent(MenuProyecto.this, TimeLog.class);
+                Intent intent1 = new Intent(MenuProyecto.this, DefectLog.class);
                 startActivity(intent1);
 
 
@@ -59,7 +59,7 @@ public class MenuProyecto extends AppCompatActivity implements View.OnClickListe
 
             case R.id.btnPlanPS:
 
-                Intent intent2 = new Intent(MenuProyecto.this, TimeLog.class);
+                Intent intent2 = new Intent(MenuProyecto.this, ProjectPlanSummary.class);
                 startActivity(intent2);
 
                 break;
