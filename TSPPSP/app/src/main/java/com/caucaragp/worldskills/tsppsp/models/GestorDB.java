@@ -12,7 +12,9 @@ public class GestorDB extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-
+        db.execSQL(Constants.TABLE_PROJECT);
+        db.execSQL(Constants.TABLE_TIMELOG);
+        db.execSQL(Constants.TABLE_DEFECTLOG);
     }
 
     @Override
