@@ -72,7 +72,6 @@ public class TimeLog extends AppCompatActivity implements View.OnClickListener {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         inicializamos();
         listarPhse();
-        validar();
         escuchar();
     }
 

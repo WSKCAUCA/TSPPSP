@@ -15,6 +15,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.caucaragp.worldskills.tsppsp.R;
+import com.caucaragp.worldskills.tsppsp.models.CDefectLog;
+import com.caucaragp.worldskills.tsppsp.models.CTimeLog;
+import com.caucaragp.worldskills.tsppsp.models.ManageDB;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -29,6 +32,7 @@ public class DefectLog extends AppCompatActivity implements View.OnClickListener
     boolean bandera =true, bandera1=false;
     int[] tiempo ={0,0};
 
+    int validar;
     private TextView mTextMessage;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -64,7 +68,6 @@ public class DefectLog extends AppCompatActivity implements View.OnClickListener
         escucharBotones();
         chronometer();
         listarSpinners();
-        validacion();
     }
 
     @Override
@@ -87,7 +90,7 @@ public class DefectLog extends AppCompatActivity implements View.OnClickListener
 
     //Método para validar los campos que no estén vacios
     private void validacion() {
-        int validar = 0;
+        validar = 0;
         if (txtDate.getText().toString().length()<0){
             validar++;
         }else {
@@ -226,6 +229,25 @@ public class DefectLog extends AppCompatActivity implements View.OnClickListener
         bandera=false;
     }
 
+    //Método para pasar del formulario a la base de datos
+    public void inputData(){
+        validacion();
+        if (validar==3) {
+            CDefectLog defectLog = new CDefectLog();
+            defectLog.setDate(txtDate.getText().toString());
+            defectLog.setDefectD(txtDefectDes.getText().toString());
+            defectLog.setFixTime(tiempo[1]);
+            defectLog.setPhaseI(spinnerPhaseI.getSelectedItem().toString());
+            defectLog.setPhaseR(spinnerPhaseR.getSelectedItem().toString());
+            defectLog.setType(spinnerType.getSelectedItem().toString());
+            defectLog.setProject(MenuPrincipal.proyecto.getId());
+            ManageDB manageDB = new ManageDB(this);
+            manageDB.insertDefectLog(defectLog);
+            Toast.makeText(this, "Se ha guardado en la base de datos correctamene", Toast.LENGTH_SHORT).show();
+            clean();
+        }
+
+    }
 
 
 }
