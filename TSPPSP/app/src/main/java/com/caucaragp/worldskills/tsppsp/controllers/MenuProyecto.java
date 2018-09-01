@@ -1,6 +1,8 @@
 package com.caucaragp.worldskills.tsppsp.controllers;
 
 import android.content.Intent;
+import android.support.constraint.ConstraintLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -12,6 +14,7 @@ import com.caucaragp.worldskills.tsppsp.R;
 public class MenuProyecto extends AppCompatActivity implements View.OnClickListener{
     //Declaramos Elementos
     Button btnTime, btnDefect,btnProjectPS;
+    ConstraintLayout contenedorM;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +50,10 @@ public class MenuProyecto extends AppCompatActivity implements View.OnClickListe
         btnTime = findViewById(R.id.btnTime);
         btnProjectPS = findViewById(R.id.btnPlanPS);
         btnDefect = findViewById(R.id.btnDefect);
+        contenedorM  = findViewById(R.id.contenedorM);
+        if (MenuPrincipal.proyecto.getTime()==0){
+            Snackbar.make(contenedorM, "Por favor ve a Project Plan Summary y agrega el tiempo de tu proyecto",Snackbar.LENGTH_LONG).show();
+        }
     }
 
     @Override

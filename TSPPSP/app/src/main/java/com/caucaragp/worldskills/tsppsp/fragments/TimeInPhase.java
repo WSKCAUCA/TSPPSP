@@ -51,12 +51,14 @@ public class TimeInPhase extends Fragment {
         return view;
     }
 
+    //Método para inicializar las variables
     private void inizialite() {
         recyclerView = view.findViewById(R.id.recyclerView);
         txtTiempo = view.findViewById(R.id.txtTiempo);
         btnGuardar = view.findViewById(R.id.btnGuardar);
     }
 
+    //Método para ingresar el adaptador al recyclerView
     private void inputAdapter() {
         ManageDB manageDB = new ManageDB(getContext());
         AdapterR adapterR = new AdapterR(manageDB.timeInPhase(MenuPrincipal.proyecto.getId()));
@@ -65,8 +67,10 @@ public class TimeInPhase extends Fragment {
         recyclerView.setHasFixedSize(true);
     }
 
+    //Método para ingresar el tiempo guardado
     private void inputTime() {
         txtTiempo.setText(Integer.toString(MenuPrincipal.proyecto.getTime()));
+
     }
 
     //Método para ecuchar el boton guardar que permitirá actualizar el tiempo del proyecto
@@ -82,6 +86,7 @@ public class TimeInPhase extends Fragment {
                             MenuPrincipal.proyecto.setTime(tiempo);
                             manageDB.updateProject(MenuPrincipal.proyecto);
                             inputAdapter();
+                            Toast.makeText(getContext(), "Se ha agregado el tiempo del proyecto correctamente", Toast.LENGTH_SHORT).show();
 
 
                         }else {

@@ -37,7 +37,6 @@ public class MenuPrincipal extends AppCompatActivity {
         inputAdapter();
     }
 
-
     //Método para inicializar las variables de la clase MenuPrincipal
     private void inizialite() {
         recyclerView = findViewById(R.id.recyclerView);
@@ -98,6 +97,10 @@ public class MenuPrincipal extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        if (proyectoList.size()<1){
+            Toast.makeText(this, "No hay proyectos, por favor ingrese uno", Toast.LENGTH_SHORT).show();
+        }
 
     }
 

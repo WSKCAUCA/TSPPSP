@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -83,6 +84,7 @@ public class ManageDB {
         values.put("PHASER",defectLog.getPhaseR());
         values.put("FIXTIME",defectLog.getFixTime());
         values.put("DEFECTD",defectLog.getDefectD());
+        values.put("PROJECT",defectLog.getProject());
         db.insert("DEFECTLOG",null,values);
         closeDB();
     }
@@ -128,6 +130,8 @@ public class ManageDB {
             if (cursor.moveToFirst()){
                 do {
                     tiempo+=cursor.getInt(0);
+
+                    
                 }while (cursor.moveToNext());
             }
             cursor.close();
@@ -139,6 +143,7 @@ public class ManageDB {
                 if (tiempo==0){
                     tmpResults.setTime(0);
                     tmpResults.setPercent(0);
+
                 }else {
                     float tmp1 = tiempo; float tmp2 = total;
                     double tmpP= (tmp1/tmp2)*100;
@@ -146,6 +151,7 @@ public class ManageDB {
                     tmpP = bigDecimal.setScale(3, RoundingMode.HALF_UP).doubleValue();
                     tmpResults.setTime(tiempo);
                     tmpResults.setPercent(tmpP);
+
                 }
             }
 
@@ -205,7 +211,6 @@ public class ManageDB {
         }
 
         closeDB();
-
         return results;
     }
 

@@ -60,6 +60,7 @@ public class TimeLog extends AppCompatActivity implements View.OnClickListener {
         txtDelta.setText("");
         txtInterruption.setText("");
         txtComment.setText("");
+        btnStop.setEnabled(false);
     }
 
     @Override
@@ -73,6 +74,7 @@ public class TimeLog extends AppCompatActivity implements View.OnClickListener {
         inicializamos();
         listarPhse();
         escuchar();
+        btnStop.setEnabled(false);
     }
 
     //Llamar o escuchar los botones
@@ -87,14 +89,14 @@ public class TimeLog extends AppCompatActivity implements View.OnClickListener {
 
         validar = 0;
 
-        if (txtStart.getText().toString().length() < 0) {
+        if (txtStart.getText().toString().length() >0) {
 
             validar++;
         } else {
             Toast.makeText(this, "Falta ingresar el campo Start", Toast.LENGTH_SHORT).show();
             txtStart.setError("Ingresa esté campo");
         }
-        if (txtStop.getText().toString().length() < 0) {
+        if (txtStop.getText().toString().length() > 0) {
 
             validar++;
         } else {
@@ -148,7 +150,7 @@ public class TimeLog extends AppCompatActivity implements View.OnClickListener {
         switch (v.getId()) {
 
             case R.id.btnStart:
-
+                btnStop.setEnabled(true);
                 obtenerHora();
                 break;
 
@@ -170,7 +172,6 @@ public class TimeLog extends AppCompatActivity implements View.OnClickListener {
         float tmp1 = delta;
         double tmp2 = tmp1 / 60000 - interrupciones;
         delta = (int) tmp2;
-        Toast.makeText(this, "" + delta, Toast.LENGTH_SHORT).show();
         txtDelta.setText(Integer.toString(delta));
 
     }

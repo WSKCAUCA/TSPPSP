@@ -43,7 +43,7 @@ public class DefectLog extends AppCompatActivity implements View.OnClickListener
             switch (item.getItemId()) {
 
                 case R.id.navigation_dashboard:
-                    clean();
+                    inputData();
                     return true;
 
             }
@@ -91,12 +91,12 @@ public class DefectLog extends AppCompatActivity implements View.OnClickListener
     //Método para validar los campos que no estén vacios
     private void validacion() {
         validar = 0;
-        if (txtDate.getText().toString().length()<0){
+        if (txtDate.getText().toString().length()>0){
             validar++;
         }else {
             txtDate.setError("Falta esté campo");
         }
-        if (txtFixTime.getText().toString().length()<0){
+        if (txtFixTime.getText().toString().length()>0){
             validar++;
         }else {
             txtFixTime.setError("Falta esté campo");
@@ -197,7 +197,7 @@ public class DefectLog extends AppCompatActivity implements View.OnClickListener
 
         List<String> phase = new ArrayList<>();
         phase.add("PLAN");
-        phase.add("DLC");
+        phase.add("DLD");
         phase.add("CODE");
         phase.add("COMPILE");
         phase.add("UT");
@@ -232,7 +232,7 @@ public class DefectLog extends AppCompatActivity implements View.OnClickListener
     //Método para pasar del formulario a la base de datos
     public void inputData(){
         validacion();
-        if (validar==3) {
+        if (validar==2) {
             CDefectLog defectLog = new CDefectLog();
             defectLog.setDate(txtDate.getText().toString());
             defectLog.setDefectD(txtDefectDes.getText().toString());
@@ -244,6 +244,9 @@ public class DefectLog extends AppCompatActivity implements View.OnClickListener
             ManageDB manageDB = new ManageDB(this);
             manageDB.insertDefectLog(defectLog);
             Toast.makeText(this, "Se ha guardado en la base de datos correctamene", Toast.LENGTH_SHORT).show();
+            tiempo[0]=0;
+            tiempo[1]=0;
+            bandera1=false;
             clean();
         }
 

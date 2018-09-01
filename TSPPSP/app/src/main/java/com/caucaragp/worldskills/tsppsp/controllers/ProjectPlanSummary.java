@@ -20,6 +20,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.caucaragp.worldskills.tsppsp.R;
+import com.caucaragp.worldskills.tsppsp.fragments.DefectsInjecte;
+import com.caucaragp.worldskills.tsppsp.fragments.DefectsRemoved;
+import com.caucaragp.worldskills.tsppsp.fragments.TimeInPhase;
 
 public class ProjectPlanSummary extends AppCompatActivity {
 
@@ -53,19 +56,13 @@ public class ProjectPlanSummary extends AppCompatActivity {
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowCustomEnabled(true);
+
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
 
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
     }
 
@@ -73,7 +70,7 @@ public class ProjectPlanSummary extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_project_plan_summary, menu);
+       // getMenuInflater().inflate(R.menu.menu_project_plan_summary, menu);
         return true;
     }
 
@@ -141,6 +138,28 @@ public class ProjectPlanSummary extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
+
+            Fragment fragment = null;
+
+            switch (position){
+                case 0:
+
+                    return fragment = new TimeInPhase();
+
+
+                case 1:
+
+                    return fragment = new DefectsInjecte();
+
+
+
+
+                case 2:
+
+                    return fragment = new DefectsRemoved();
+
+
+            }
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
             return PlaceholderFragment.newInstance(position + 1);
@@ -149,6 +168,9 @@ public class ProjectPlanSummary extends AppCompatActivity {
         @Override
         public int getCount() {
             // Show 3 total pages.
+
+
+
             return 3;
         }
     }
