@@ -14,13 +14,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.caucaragp.worldskills.tsppsp.R;
+import com.caucaragp.worldskills.tsppsp.models.CTimeLog;
+import com.caucaragp.worldskills.tsppsp.models.ManageDB;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class TimeLog extends AppCompatActivity implements View.OnClickListener{
+public class TimeLog extends AppCompatActivity implements View.OnClickListener {
 
     //Declaramos variables
 
@@ -34,6 +36,7 @@ public class TimeLog extends AppCompatActivity implements View.OnClickListener{
     Date dateStart, dateStop;
     private TextView mTextMessage;
 
+    int validar;
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -42,7 +45,7 @@ public class TimeLog extends AppCompatActivity implements View.OnClickListener{
             switch (item.getItemId()) {
 
                 case R.id.navigation_dashboard:
-                    clean();
+                    inputData();
                     return true;
 
             }
@@ -83,25 +86,28 @@ public class TimeLog extends AppCompatActivity implements View.OnClickListener{
     //Creamos metodo para validar que los campos no esten vacios
     private void validar() {
 
-        int validar = 0;
+        validar = 0;
 
-        if (txtStart.getText().toString().length()< 0){
+        if (txtStart.getText().toString().length() < 0) {
 
             validar++;
-        }else {
+        } else {
+            Toast.makeText(this, "Falta ingresar el campo Start", Toast.LENGTH_SHORT).show();
             txtStart.setError("Ingresa esté campo");
         }
-        if (txtStop.getText().toString().length()< 0){
+        if (txtStop.getText().toString().length() < 0) {
 
             validar++;
-        }else {
+        } else {
+            Toast.makeText(this, "Falta ingresar el campo Stop", Toast.LENGTH_SHORT).show();
             txtStop.setError("Ingresa esté campo");
         }
-        if (delta >= 0){
-
-            txtDelta.setError("Ingresa esté campo");
+        if (delta >= 0) {
+            validar++;
+        }else {
+            Toast.makeText(this, "El campo delta no puede ser 0", Toast.LENGTH_SHORT).show();
+            txtDelta.setError("Esté campo no puede ser menor a 0");
         }
-
 
 
     }
@@ -109,7 +115,7 @@ public class TimeLog extends AppCompatActivity implements View.OnClickListener{
     //Ingresamos o listamos elementos al spinner
     private void listarPhse() {
 
-        List<String>phase = new ArrayList<>();
+        List<String> phase = new ArrayList<>();
         phase.add("PLAN");
         phase.add("DLC");
         phase.add("CODE");
@@ -117,7 +123,7 @@ public class TimeLog extends AppCompatActivity implements View.OnClickListener{
         phase.add("UT");
         phase.add("PM");
 
-        ArrayAdapter adapter = new ArrayAdapter<>(this,android.R.layout.simple_dropdown_item_1line, phase);
+        ArrayAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, phase);
         spinnerPhase.setAdapter(adapter);
     }
 
@@ -140,7 +146,7 @@ public class TimeLog extends AppCompatActivity implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
 
             case R.id.btnStart:
 
@@ -161,11 +167,11 @@ public class TimeLog extends AppCompatActivity implements View.OnClickListener{
     //Calculamos delta que es el tiempo que total que se demoro en el timer
     private void calcularDelta() {
 
-        delta = (int) (dateStop.getTime()- dateStart.getTime());
+        delta = (int) (dateStop.getTime() - dateStart.getTime());
         float tmp1 = delta;
-        double tmp2 = tmp1/60000 - interrupciones;
-        delta= (int) tmp2;
-        Toast.makeText(this, ""+delta, Toast.LENGTH_SHORT).show();
+        double tmp2 = tmp1 / 60000 - interrupciones;
+        delta = (int) tmp2;
+        Toast.makeText(this, "" + delta, Toast.LENGTH_SHORT).show();
         txtDelta.setText(Integer.toString(delta));
 
     }
@@ -173,12 +179,12 @@ public class TimeLog extends AppCompatActivity implements View.OnClickListener{
     //Este metodo sirve para ver si el usuario ingresa o no interrupciones en el timer
     private void calcularInterrupciones() {
 
-     try {
-         interrupciones = Integer.parseInt(txtInterruption.getText().toString());
-     }catch (Exception e){
-         txtInterruption.setText("0");
-         interrupciones=0;
-     }
+        try {
+            interrupciones = Integer.parseInt(txtInterruption.getText().toString());
+        } catch (Exception e) {
+            txtInterruption.setText("0");
+            interrupciones = 0;
+        }
 
 
     }
@@ -200,4 +206,25 @@ public class TimeLog extends AppCompatActivity implements View.OnClickListener{
         String fecha1 = fecha.format(dateStart);
         txtStart.setText(fecha1);
     }
+
+    //Método para pasar del formulario a la base de datos
+    public void inputData(){
+        validar();
+        if (validar==3) {
+            CTimeLog timeLog = new CTimeLog();
+            timeLog.setPhase(spinnerPhase.getSelectedItem().toString());
+            timeLog.setStart(txtStart.getText().toString());
+            timeLog.setStop(txtStop.getText().toString());
+            timeLog.setComments(txtComment.getText().toString());
+            timeLog.setInterruption(interrupciones);
+            timeLog.setDelta(delta);
+            timeLog.setProject(MenuPrincipal.proyecto.getId());
+            ManageDB manageDB = new ManageDB(this);
+            manageDB.insertTimeLog(timeLog);
+            Toast.makeText(this, "Se ha guardado en la base de datos correctamene", Toast.LENGTH_SHORT).show();
+            clean();
+        }
+
+    }
+
 }
