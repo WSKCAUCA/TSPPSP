@@ -88,6 +88,10 @@ public class ProjectPlanSummary extends AppCompatActivity {
         if (id == R.id.action_settings) {
             return true;
         }
+        if (id == android.R.id.home){
+
+            finish();
+        }
 
         return super.onOptionsItemSelected(item);
     }
