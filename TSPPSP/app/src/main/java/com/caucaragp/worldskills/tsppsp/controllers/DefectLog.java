@@ -38,13 +38,15 @@ public class DefectLog extends AppCompatActivity implements View.OnClickListener
             switch (item.getItemId()) {
 
                 case R.id.navigation_dashboard:
-                    mTextMessage.setText(R.string.title_dashboard);
+                    clean();
                     return true;
 
             }
             return false;
         }
     };
+
+
 
 
     @Override
@@ -60,6 +62,11 @@ public class DefectLog extends AppCompatActivity implements View.OnClickListener
         chronometer();
         listarSpinners();
         validacion();
+    }
+    //Método que nos ayuda a limpiar los campos
+    private void clean() {
+        txtDate.setText("");
+        txtFixTime.setText("");
     }
 
     //Método para validar los campos que no estén vacios

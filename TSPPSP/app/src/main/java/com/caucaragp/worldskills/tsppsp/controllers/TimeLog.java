@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.caucaragp.worldskills.tsppsp.R;
 
@@ -41,13 +42,22 @@ public class TimeLog extends AppCompatActivity implements View.OnClickListener{
             switch (item.getItemId()) {
 
                 case R.id.navigation_dashboard:
-                    mTextMessage.setText(R.string.title_dashboard);
+                    clean();
                     return true;
 
             }
             return false;
         }
     };
+
+    //Método el cual nos ayuda a limpiar los campos
+    private void clean() {
+        txtStart.setText("");
+        txtStop.setText("");
+        txtDelta.setText("");
+        txtInterruption.setText("");
+        txtComment.setText("");
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -151,15 +161,24 @@ public class TimeLog extends AppCompatActivity implements View.OnClickListener{
     //Calculamos delta que es el tiempo que total que se demoro en el timer
     private void calcularDelta() {
 
-
+        delta = (int) (dateStop.getTime()- dateStart.getTime());
+        float tmp1 = delta;
+        double tmp2 = tmp1/60000 - interrupciones;
+        delta= (int) tmp2;
+        Toast.makeText(this, ""+delta, Toast.LENGTH_SHORT).show();
+        txtDelta.setText(Integer.toString(delta));
 
     }
 
     //Este metodo sirve para ver si el usuario ingresa o no interrupciones en el timer
     private void calcularInterrupciones() {
 
-
-
+     try {
+         interrupciones = Integer.parseInt(txtInterruption.getText().toString());
+     }catch (Exception e){
+         txtInterruption.setText("0");
+         interrupciones=0;
+     }
 
 
     }
